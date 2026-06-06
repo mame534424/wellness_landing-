@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>WellMind Ethiopia — Your Mental Wellness Companion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #2E7D5E;
+    --green-light: #E8F5EE;
+    --green-mid: #5BAD88;
+    --green-dark: #1A5040;
+    --amber: #F5A623;
+    --amber-light: #FEF3E0;
+    --cream: #FAFAF7;
+    --text-dark: #1A2B22;
+    --text-mid: #3D5A4A;
+    --text-muted: #7A9585;
+    --white: #FFFFFF;
+    --card-shadow: 0 4px 24px rgba(46,125,94,0.10);
+    --border: rgba(46,125,94,0.15);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 6vw;
+    height: 68px;
+    background: rgba(250,250,247,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow .3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 20px rgba(46,125,94,0.08); }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo-leaf {
+    width: 34px; height: 34px; background: var(--green);
+    border-radius: 50% 50% 50% 10%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .nav-logo-leaf svg { width: 18px; height: 18px; }
+  .nav-logo-text { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--text-dark); letter-spacing: -0.3px; }
+  .nav-logo-text span { color: var(--green); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-size: 14px; font-weight: 500; color: var(--text-mid); text-decoration: none; transition: color .2s; }
+  .nav-links a:hover { color: var(--green); }
+  .nav-cta {
+    background: var(--green); color: #fff; border: none; cursor: pointer;
+    padding: 10px 22px; border-radius: 50px; font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 600; letter-spacing: 0.2px;
+    transition: background .2s, transform .1s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--green-dark); transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { width: 22px; height: 2px; background: var(--text-dark); border-radius: 2px; transition: .3s; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 100px 6vw 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--green-light);
+    opacity: 0.5;
+    z-index: 0;
+  }
+  .hero-bg-circle.c1 { width: 600px; height: 600px; right: -120px; top: -80px; }
+  .hero-bg-circle.c2 { width: 300px; height: 300px; right: 180px; bottom: -60px; opacity: 0.3; }
+  .hero-bg-circle.c3 { width: 180px; height: 180px; left: 8vw; bottom: 80px; opacity: 0.2; }
+  .hero-content { position: relative; z-index: 1; max-width: 560px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green-light); border: 1px solid rgba(46,125,94,0.25);
+    color: var(--green); padding: 6px 16px; border-radius: 50px;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.3px;
+    margin-bottom: 28px;
+    animation: fadeUp .6s ease both;
+  }
+  .hero-badge-dot { width: 7px; height: 7px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.3)} }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 5.5vw, 64px);
+    line-height: 1.15;
+    color: var(--text-dark);
+    margin-bottom: 22px;
+    animation: fadeUp .7s .1s ease both;
+  }
+  .hero h1 em { font-style: italic; color: var(--green); }
+  .hero p {
+    font-size: 17px; line-height: 1.75; color: var(--text-mid);
+    max-width: 480px; margin-bottom: 36px;
+    animation: fadeUp .7s .2s ease both;
+  }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; animation: fadeUp .7s .3s ease both; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green); color: #fff; text-decoration: none;
+    padding: 14px 28px; border-radius: 50px; font-weight: 600; font-size: 15px;
+    transition: background .2s, transform .15s, box-shadow .2s;
+    box-shadow: 0 4px 18px rgba(46,125,94,0.3);
+  }
+  .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(46,125,94,0.35); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; color: var(--green); text-decoration: none;
+    padding: 14px 24px; border-radius: 50px; font-weight: 600; font-size: 15px;
+    border: 1.5px solid var(--green);
+    transition: background .2s, transform .15s;
+  }
+  .btn-secondary:hover { background: var(--green-light); transform: translateY(-2px); }
+  .hero-mockup {
+    position: absolute; right: 6vw; top: 50%; transform: translateY(-50%);
+    z-index: 1;
+    animation: floatIn .8s .2s ease both;
+  }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes floatIn { from{opacity:0;transform:translateY(-50%) translateX(40px)} to{opacity:1;transform:translateY(-50%) translateX(0)} }
+  @keyframes float { 0%,100%{transform:translateY(-50%) translateY(0)} 50%{transform:translateY(-50%) translateY(-10px)} }
+  .phone-frame {
+    width: 240px; height: 480px;
+    background: var(--text-dark);
+    border-radius: 36px;
+    padding: 12px;
+    box-shadow: 0 30px 80px rgba(26,43,34,0.35), 0 8px 24px rgba(26,43,34,0.2);
+    position: relative;
+    animation: float 4s 1s ease-in-out infinite;
+  }
+  .phone-screen {
+    background: var(--green-light);
+    border-radius: 26px;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    display: flex; flex-direction: column;
+  }
+  .phone-notch {
+    width: 80px; height: 24px; background: var(--text-dark);
+    border-radius: 0 0 16px 16px;
+    margin: 0 auto;
+    position: relative; z-index: 2;
+  }
+  .phone-status { display: flex; justify-content: space-between; padding: 6px 16px; font-size: 9px; color: var(--text-mid); font-weight: 600; }
+  .phone-header { padding: 8px 16px 12px; text-align: center; }
+  .phone-header-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: var(--text-dark); }
+  .phone-header-sub { font-size: 9px; color: var(--text-muted); margin-top: 2px; }
+  .phone-greeting {
+    background: var(--green); margin: 0 12px; border-radius: 14px; padding: 12px;
+  }
+  .phone-greeting-name { font-size: 9px; color: rgba(255,255,255,0.7); margin-bottom: 2px; }
+  .phone-greeting-msg { font-size: 11px; font-weight: 600; color: #fff; line-height: 1.4; }
+  .phone-streak { display: flex; align-items: center; gap: 4px; margin-top: 6px; }
+  .phone-streak span { font-size: 9px; color: rgba(255,255,255,0.9); }
+  .phone-cards { padding: 10px 12px 0; display: flex; flex-direction: column; gap: 7px; }
+  .phone-card { background: #fff; border-radius: 10px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; }
+  .phone-card-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+  .phone-card-info { flex: 1; }
+  .phone-card-name { font-size: 9px; font-weight: 600; color: var(--text-dark); }
+  .phone-card-desc { font-size: 8px; color: var(--text-muted); margin-top: 1px; }
+  .phone-card-check { width: 18px; height: 18px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; }
+  .phone-card-check svg { width: 10px; height: 10px; }
+  .phone-nav { display: flex; justify-content: space-around; padding: 8px 0 4px; background: #fff; margin-top: auto; border-top: 1px solid rgba(0,0,0,.06); }
+  .phone-nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .phone-nav-icon { font-size: 14px; }
+  .phone-nav-label { font-size: 7px; color: var(--text-muted); }
+  .phone-nav-item.active .phone-nav-label { color: var(--green); }
+
+  /* STATS */
+  .stats-bar {
+    background: var(--green);
+    padding: 28px 6vw;
+    display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;
+  }
+  .stat-item { text-align: center; color: #fff; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; line-height: 1; }
+  .stat-label { font-size: 13px; opacity: 0.8; margin-top: 4px; font-weight: 400; }
+
+  /* SECTIONS */
+  section { padding: 80px 6vw; }
+  .section-tag {
+    display: inline-block; background: var(--green-light); color: var(--green);
+    font-size: 12px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 50px; margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.2; color: var(--text-dark); margin-bottom: 14px;
+  }
+  .section-sub { font-size: 16px; color: var(--text-mid); line-height: 1.7; max-width: 520px; }
+  .text-center { text-align: center; }
+  .text-center .section-sub { margin: 0 auto; }
+
+  /* FEATURES */
+  .features-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px; margin-top: 56px;
+  }
+  .feature-card {
+    background: var(--white); border-radius: 20px; padding: 28px;
+    border: 1px solid var(--border);
+    transition: transform .25s, box-shadow .25s;
+    cursor: default;
+  }
+  .feature-card:hover { transform: translateY(-5px); box-shadow: var(--card-shadow); }
+  .feature-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-bottom: 18px;
+  }
+  .feature-card h3 { font-size: 18px; font-weight: 600; color: var(--text-dark); margin-bottom: 10px; }
+  .feature-card p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
+  .feature-tag {
+    display: inline-block; margin-top: 14px;
+    background: var(--green-light); color: var(--green);
+    font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 50px;
+  }
+
+  /* HOW IT WORKS */
+  .how-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .steps { display: flex; flex-direction: column; gap: 0; }
+  .step { display: flex; gap: 20px; padding: 24px 0; position: relative; }
+  .step:not(:last-child)::after {
+    content: ''; position: absolute; left: 19px; top: 52px;
+    width: 2px; height: calc(100% - 28px);
+    background: repeating-linear-gradient(to bottom, var(--green-mid) 0, var(--green-mid) 4px, transparent 4px, transparent 10px);
+  }
+  .step-num {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--green); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 15px; flex-shrink: 0;
+  }
+  .step-content h4 { font-size: 17px; font-weight: 600; color: var(--text-dark); margin-bottom: 6px; }
+  .step-content p { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
+  .how-visual {
+    display: flex; flex-direction: column; gap: 16px;
+    position: relative;
+  }
+  .how-card {
+    background: var(--white); border-radius: 16px; padding: 20px 22px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; gap: 14px;
+    transition: transform .2s;
+  }
+  .how-card:hover { transform: translateX(6px); }
+  .how-card-emoji { font-size: 28px; width: 50px; text-align: center; flex-shrink: 0; }
+  .how-card h4 { font-size: 15px; font-weight: 600; color: var(--text-dark); margin-bottom: 3px; }
+  .how-card p { font-size: 13px; color: var(--text-muted); }
+
+  /* SCREENSHOTS / APP SCREENS */
+  .screens-section { background: var(--green-light); }
+  .screens-grid {
+    display: flex; gap: 20px; overflow-x: auto; padding: 40px 0 20px;
+    scrollbar-width: none;
+  }
+  .screens-grid::-webkit-scrollbar { display: none; }
+  .screen-item { flex-shrink: 0; text-align: center; }
+  .screen-phone {
+    width: 160px; height: 300px;
+    background: var(--text-dark);
+    border-radius: 24px; padding: 8px;
+    box-shadow: 0 16px 40px rgba(26,43,34,0.25);
+    margin: 0 auto 14px;
+    transition: transform .25s;
+  }
+  .screen-phone:hover { transform: translateY(-8px) scale(1.03); }
+  .screen-inner { background: #fff; border-radius: 18px; height: 100%; overflow: hidden; }
+  .screen-header { background: var(--green); padding: 12px 12px 10px; }
+  .screen-header-title { font-size: 10px; font-weight: 700; color: #fff; }
+  .screen-header-sub { font-size: 8px; color: rgba(255,255,255,.7); margin-top: 1px; }
+  .screen-body { padding: 10px; }
+  .screen-label { font-size: 13px; font-weight: 600; color: var(--text-mid); margin-top: 8px; }
+
+  /* CHAT PREVIEW */
+  .chat-section { background: var(--cream); }
+  .chat-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .chat-window {
+    background: var(--white); border-radius: 24px; overflow: hidden;
+    box-shadow: var(--card-shadow); border: 1px solid var(--border);
+  }
+  .chat-header { background: var(--green); padding: 16px 20px; display: flex; align-items: center; gap: 12px; }
+  .chat-avatar { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .chat-header-info h4 { font-size: 14px; font-weight: 600; color: #fff; }
+  .chat-header-info p { font-size: 11px; color: rgba(255,255,255,.75); }
+  .chat-online { width: 8px; height: 8px; background: #4ade80; border-radius: 50%; margin-left: auto; box-shadow: 0 0 0 2px rgba(255,255,255,.3); }
+  .chat-body { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+  .chat-bubble { max-width: 78%; padding: 10px 14px; border-radius: 16px; font-size: 13px; line-height: 1.5; }
+  .chat-bubble.mindi { background: var(--green-light); color: var(--text-dark); align-self: flex-start; border-bottom-left-radius: 4px; }
+  .chat-bubble.user { background: var(--green); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+  .chat-input-row { padding: 12px 16px; border-top: 1px solid var(--border); display: flex; gap: 10px; align-items: center; }
+  .chat-input { flex: 1; background: var(--green-light); border: none; border-radius: 20px; padding: 10px 16px; font-size: 13px; color: var(--text-mid); outline: none; }
+  .chat-send { width: 36px; height: 36px; border-radius: 50%; background: var(--green); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .chat-send svg { width: 16px; height: 16px; }
+
+  /* QR SECTION */
+  .qr-section {
+    background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%);
+    padding: 80px 6vw; text-align: center;
+  }
+  .qr-section .section-tag { background: rgba(255,255,255,.15); color: #fff; }
+  .qr-section .section-title { color: #fff; margin: 0 auto 12px; max-width: 600px; }
+  .qr-section .section-sub { color: rgba(255,255,255,.8); margin: 0 auto 48px; }
+  .qr-cards { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+  .qr-card {
+    background: rgba(255,255,255,.12); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,.2); border-radius: 24px;
+    padding: 36px; display: flex; flex-direction: column; align-items: center; gap: 20px;
+    transition: background .2s, transform .2s;
+  }
+  .qr-card:hover { background: rgba(255,255,255,.18); transform: translateY(-4px); }
+  .qr-box {
+    width: 160px; height: 160px; background: #fff; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .qr-box svg { width: 130px; height: 130px; }
+  .qr-card-title { font-size: 16px; font-weight: 600; color: #fff; text-align: center; }
+  .qr-card-sub { font-size: 13px; color: rgba(255,255,255,.7); text-align: center; max-width: 200px; }
+  .qr-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,.2); color: #fff; border: 1px solid rgba(255,255,255,.3);
+    padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 600;
+    text-decoration: none; transition: background .2s;
+  }
+  .qr-link:hover { background: rgba(255,255,255,.3); }
+  .or-divider { font-size: 13px; color: rgba(255,255,255,.6); margin: 0 4px; align-self: center; }
+
+  /* TEAM / ABOUT */
+  .about-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .values-list { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
+  .value-item { display: flex; align-items: flex-start; gap: 14px; }
+  .value-dot { width: 10px; height: 10px; background: var(--green); border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+  .value-item h4 { font-size: 15px; font-weight: 600; color: var(--text-dark); margin-bottom: 3px; }
+  .value-item p { font-size: 13px; color: var(--text-mid); line-height: 1.55; }
+  .hackathon-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--amber-light); border: 1px solid rgba(245,166,35,.3);
+    border-radius: 16px; padding: 16px 22px; margin-top: 28px;
+  }
+  .hackathon-badge-icon { font-size: 28px; }
+  .hackathon-badge-text h4 { font-size: 14px; font-weight: 600; color: #9a5f00; }
+  .hackathon-badge-text p { font-size: 12px; color: #b87c1a; margin-top: 2px; }
+  .stack-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .pill {
+    background: var(--green-light); color: var(--green);
+    font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 50px;
+    border: 1px solid rgba(46,125,94,.2);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--text-dark); color: rgba(255,255,255,.6);
+    padding: 40px 6vw;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+  }
+  .footer-logo { display: flex; align-items: center; gap: 10px; }
+  .footer-logo-text { font-family: 'Playfair Display', serif; font-size: 16px; color: #fff; }
+  footer p { font-size: 13px; }
+  .footer-heart { color: #f87171; }
+
+  /* SCROLL ANIMATIONS */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: .1s; }
+  .reveal-delay-2 { transition-delay: .2s; }
+  .reveal-delay-3 { transition-delay: .3s; }
+  .reveal-delay-4 { transition-delay: .4s; }
+
+  /* SCREEN CONTENT STYLES */
+  .s-challenges { display: flex; flex-direction: column; }
+  .s-challenge-row { display: flex; align-items: center; gap: 6px; padding: 5px 8px; border-bottom: 1px solid rgba(0,0,0,.05); }
+  .s-challenge-emoji { font-size: 11px; }
+  .s-challenge-text { flex: 1; }
+  .s-challenge-title { font-size: 8px; font-weight: 600; color: var(--text-dark); }
+  .s-challenge-streak { font-size: 7px; color: var(--text-muted); }
+  .s-challenge-done { width: 14px; height: 14px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .s-challenge-done svg { width: 8px; height: 8px; }
+  .s-btn { background: var(--green); border-radius: 6px; padding: 4px 8px; font-size: 8px; font-weight: 700; color: #fff; }
+
+  .stress-emoji-row { display: flex; gap: 4px; padding: 8px; flex-wrap: wrap; }
+  .stress-emoji-btn { flex: 1; min-width: 28px; padding: 6px 2px; text-align: center; border-radius: 8px; font-size: 11px; background: var(--green-light); }
+  .stress-emoji-btn.active { background: var(--green); }
+  .stress-causes { padding: 0 8px 8px; display: flex; flex-wrap: wrap; gap: 4px; }
+  .cause-pill { font-size: 7px; padding: 3px 7px; background: rgba(0,0,0,.05); border-radius: 50px; color: var(--text-mid); }
+  .focus-timer { padding: 14px 10px; text-align: center; }
+  .focus-circle { width: 80px; height: 80px; border-radius: 50%; border: 4px solid var(--green); margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; background: var(--green-light); }
+  .focus-time { font-size: 18px; font-weight: 700; color: var(--green); }
+  .focus-label { font-size: 9px; color: var(--text-muted); }
+  .focus-start-btn { background: var(--green); color: #fff; border-radius: 20px; padding: 8px 20px; font-size: 9px; font-weight: 700; display: inline-block; margin-top: 10px; }
+
+  /* MOBILE RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-mockup { display: none; }
+    .hero { min-height: auto; padding: 100px 6vw 60px; }
+    .how-wrapper, .chat-wrapper, .about-wrapper { grid-template-columns: 1fr; gap: 40px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .hero h1 { font-size: 36px; }
+    .screens-grid { padding: 30px 0 10px; }
+  }
+  @media (max-width: 600px) {
+    .stats-bar { gap: 32px; }
+    .stat-num { font-size: 28px; }
+    .qr-cards { flex-direction: column; align-items: center; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-leaf">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round">
+        <path d="M12 22c0 0-8-4-8-12C4 5.4 7.4 2 12 2s8 3.4 8 8c0 8-8 12-8 12z"/>
+        <path d="M12 8v8M9 12l3-4 3 4"/>
+      </svg>
+    </div>
+    <span class="nav-logo-text">Well<span>Mind</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">How it Works</a></li>
+    <li><a href="#chat">AI Wellness</a></li>
+    <li><a href="#download">Download</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <a href="#download" class="nav-cta">Get the App</a>
+  <div class="hamburger" onclick="this.classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+  <div class="hero-bg-circle c3"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      Built for Ethiopia • Mental Wellness App
+    </div>
+    <h1>Your mind <em>deserves</em> care, every day.</h1>
+    <p>WellMind Ethiopia brings compassionate mental wellness tools — AI support, community circles, stress tracking, focus sessions, and daily challenges — to your pocket.</p>
+    <div class="hero-actions">
+      <a href="#download" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 8v8M8 14l4 4 4-4"/></svg>
+        Download Free
+      </a>
+      <a href="#features" class="btn-secondary">
+        Explore Features
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- PHONE MOCKUP -->
+  <div class="hero-mockup">
+    <div class="phone-frame">
+      <div class="phone-screen">
+        <div class="phone-notch"></div>
+        <div class="phone-status">
+          <span>9:41</span>
+          <span>●●● 🔋</span>
+        </div>
+        <div class="phone-header">
+          <div class="phone-header-title">WellMind</div>
+          <div class="phone-header-sub">Good Morning, Tigist 🌿</div>
+        </div>
+        <div class="phone-greeting">
+          <div class="phone-greeting-name">Today's Affirmation</div>
+          <div class="phone-greeting-msg">"You are stronger than you think. One mindful step at a time."</div>
+          <div class="phone-streak">
+            <span>🔥 7-day streak</span>
+          </div>
+        </div>
+        <div class="phone-cards">
+          <div class="phone-card">
+            <div class="phone-card-icon" style="background:#E8F5EE">💧</div>
+            <div class="phone-card-info">
+              <div class="phone-card-name">Drink Water</div>
+              <div class="phone-card-desc">Daily hydration challenge</div>
+            </div>
+            <div class="phone-card-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>
+            </div>
+          </div>
+          <div class="phone-card">
+            <div class="phone-card-icon" style="background:#FEF3E0">🧘</div>
+            <div class="phone-card-info">
+              <div class="phone-card-name">Morning Stretch</div>
+              <div class="phone-card-desc">🔥 3 days</div>
+            </div>
+            <div style="font-size:8px;background:var(--green);color:#fff;padding:4px 8px;border-radius:8px;font-weight:700;">Mark Done</div>
+          </div>
+          <div class="phone-card">
+            <div class="phone-card-icon" style="background:#EEF2FF">🎯</div>
+            <div class="phone-card-info">
+              <div class="phone-card-name">Focus Session</div>
+              <div class="phone-card-desc">🔥 5 days</div>
+            </div>
+            <div class="phone-card-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="phone-nav">
+          <div class="phone-nav-item active">
+            <div class="phone-nav-icon">🏠</div>
+            <div class="phone-nav-label" style="color:var(--green)">Home</div>
+          </div>
+          <div class="phone-nav-item">
+            <div class="phone-nav-icon">👥</div>
+            <div class="phone-nav-label">Circles</div>
+          </div>
+          <div class="phone-nav-item">
+            <div class="phone-nav-icon">💬</div>
+            <div class="phone-nav-label">Chat</div>
+          </div>
+          <div class="phone-nav-item">
+            <div class="phone-nav-icon">🔔</div>
+            <div class="phone-nav-label">Reminders</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item reveal">
+    <div class="stat-num" id="stat1">0</div>
+    <div class="stat-label">Active Users</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-1">
+    <div class="stat-num" id="stat2">0</div>
+    <div class="stat-label">Support Circles</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-2">
+    <div class="stat-num" id="stat3">0</div>
+    <div class="stat-label">Wellness Challenges</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-3">
+    <div class="stat-num">AI</div>
+    <div class="stat-label">Powered Wellness</div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="text-center">
+    <span class="section-tag reveal">Everything you need</span>
+    <h2 class="section-title reveal reveal-delay-1">Six pillars of<br>mental wellness</h2>
+    <p class="section-sub reveal reveal-delay-2">WellMind Ethiopia combines AI-powered tools, community connection, and science-backed practices into one seamless experience.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon" style="background:#E8F5EE">🤝</div>
+      <h3>Support Circles</h3>
+      <p>Join or create safe community spaces where people share experiences, encourage each other, and grow together on their wellness journey.</p>
+      <span class="feature-tag">Community</span>
+    </div>
+    <div class="feature-card reveal reveal-delay-1">
+      <div class="feature-icon" style="background:#FEF3E0">⭐</div>
+      <h3>Daily Challenges</h3>
+      <p>Build healthy habits with streaks and daily challenges — drink water, stretch, meditate, breathe. Small wins that compound into big change.</p>
+      <span class="feature-tag">Habits</span>
+    </div>
+    <div class="feature-card reveal reveal-delay-2">
+      <div class="feature-icon" style="background:#EEF2FF">💬</div>
+      <h3>AI Wellness Chat</h3>
+      <p>Talk to Mindi, your compassionate AI companion. Get emotional support, breathing exercises, and gentle guidance — available 24/7.</p>
+      <span class="feature-tag">AI-Powered</span>
+    </div>
+    <div class="feature-card reveal reveal-delay-3">
+      <div class="feature-icon" style="background:#FFF0F0">📊</div>
+      <h3>Stress Tracking</h3>
+      <p>Log your daily stress levels and identify patterns. Discover your triggers and get personalised insights to manage stress better over time.</p>
+      <span class="feature-tag">Self-Awareness</span>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon" style="background:#F0F9FF">🎯</div>
+      <h3>Focus Sessions</h3>
+      <p>Pomodoro-style focus timer with interruption tracking and ratings. Build deep focus habits and watch your productivity improve week by week.</p>
+      <span class="feature-tag">Productivity</span>
+    </div>
+    <div class="feature-card reveal reveal-delay-1">
+      <div class="feature-icon" style="background:#E8F5EE">🔔</div>
+      <h3>Smart Reminders</h3>
+      <p>Scheduled local notifications for water, stretch, breathing exercises, and sleep prep — keeping you on track throughout your day.</p>
+      <span class="feature-tag">Reminders</span>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" style="background: var(--green-light);">
+  <div class="how-wrapper">
+    <div>
+      <span class="section-tag reveal">Getting started</span>
+      <h2 class="section-title reveal reveal-delay-1">Wellness made simple, from day one</h2>
+      <p class="section-sub reveal reveal-delay-2">Four easy steps to build your personal wellness routine with WellMind Ethiopia.</p>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Create Your Account</h4>
+            <p>Sign up in seconds with a secure JWT-authenticated account. Your data stays private and protected.</p>
+          </div>
+        </div>
+        <div class="step reveal reveal-delay-1">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Join a Support Circle</h4>
+            <p>Find your community — connect with circles focused on stress, focus, grief support, or general wellness.</p>
+          </div>
+        </div>
+        <div class="step reveal reveal-delay-2">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>Start Daily Challenges</h4>
+            <p>Pick wellness challenges and track your streaks. Mindi will cheer you on every day.</p>
+          </div>
+        </div>
+        <div class="step reveal reveal-delay-3">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>Track Your Progress</h4>
+            <p>View stress insights, focus stats, and wellbeing trends in your personalised dashboard.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="how-visual reveal">
+      <div class="how-card">
+        <div class="how-card-emoji">😌</div>
+        <div>
+          <h4>Stress Log — Low</h4>
+          <p>Today's check-in completed • School stress decreased this week</p>
+        </div>
+      </div>
+      <div class="how-card">
+        <div class="how-card-emoji">🎯</div>
+        <div>
+          <h4>25-min Focus Session</h4>
+          <p>Deep Focus rating • 0 interruptions • 5-day streak 🔥</p>
+        </div>
+      </div>
+      <div class="how-card">
+        <div class="how-card-emoji">👥</div>
+        <div>
+          <h4>Wellness Circle</h4>
+          <p>12 members joined the Morning Motivation circle today</p>
+        </div>
+      </div>
+      <div class="how-card">
+        <div class="how-card-emoji">📈</div>
+        <div>
+          <h4>Weekly Insight</h4>
+          <p>"Your focus improves on low-stress days by 40%"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APP SCREENS -->
+<section class="screens-section" id="screens">
+  <div class="text-center">
+    <span class="section-tag reveal">The app experience</span>
+    <h2 class="section-title reveal reveal-delay-1">Beautiful screens,<br>purposeful design</h2>
+  </div>
+  <div class="screens-grid">
+
+    <!-- Challenges Screen -->
+    <div class="screen-item">
+      <div class="screen-phone">
+        <div class="screen-inner">
+          <div class="screen-header"><div class="screen-header-title">Daily Challenges</div><div class="screen-header-sub">3 of 5 completed</div></div>
+          <div class="screen-body">
+            <div class="s-challenges">
+              <div class="s-challenge-row"><div class="s-challenge-emoji">💧</div><div class="s-challenge-text"><div class="s-challenge-title">Drink Water</div><div class="s-challenge-streak">🔥 7 days</div></div><div class="s-challenge-done"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg></div></div>
+              <div class="s-challenge-row"><div class="s-challenge-emoji">🧘</div><div class="s-challenge-text"><div class="s-challenge-title">Meditate</div><div class="s-challenge-streak">🔥 3 days</div></div><div class="s-challenge-done"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg></div></div>
+              <div class="s-challenge-row"><div class="s-challenge-emoji">🚶</div><div class="s-challenge-text"><div class="s-challenge-title">Evening Walk</div><div class="s-challenge-streak">🔥 5 days</div></div><div class="s-challenge-done"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg></div></div>
+              <div class="s-challenge-row"><div class="s-challenge-emoji">📖</div><div class="s-challenge-text"><div class="s-challenge-title">Read 10 pages</div><div class="s-challenge-streak">🔥 1 day</div></div><div class="s-btn">Mark Done</div></div>
+              <div class="s-challenge-row"><div class="s-challenge-emoji">😴</div><div class="s-challenge-text"><div class="s-challenge-title">Sleep by 10pm</div><div class="s-challenge-streak">New streak</div></div><div class="s-btn">Mark Done</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Challenges</div>
+    </div>
+
+    <!-- Stress Screen -->
+    <div class="screen-item">
+      <div class="screen-phone">
+        <div class="screen-inner">
+          <div class="screen-header" style="background:#c0392b"><div class="screen-header-title">Stress Check-In</div><div class="screen-header-sub">How are you feeling today?</div></div>
+          <div class="screen-body">
+            <div style="font-size:8px;font-weight:700;color:var(--text-mid);margin-bottom:4px;">Stress Level</div>
+            <div class="stress-emoji-row">
+              <div class="stress-emoji-btn">😌<div style="font-size:6px;margin-top:2px;color:var(--text-muted)">Low</div></div>
+              <div class="stress-emoji-btn active">😐<div style="font-size:6px;margin-top:2px;color:#fff">Mod</div></div>
+              <div class="stress-emoji-btn">😟<div style="font-size:6px;margin-top:2px;color:var(--text-muted)">High</div></div>
+              <div class="stress-emoji-btn">😫<div style="font-size:6px;margin-top:2px;color:var(--text-muted)">Very</div></div>
+            </div>
+            <div style="font-size:8px;font-weight:700;color:var(--text-mid);margin:8px 0 4px;padding:0 8px;">What's causing it?</div>
+            <div class="stress-causes">
+              <div class="cause-pill" style="background:var(--green-light);color:var(--green);">School ✓</div>
+              <div class="cause-pill">Work</div>
+              <div class="cause-pill">Money</div>
+              <div class="cause-pill">Health</div>
+              <div class="cause-pill">Relations</div>
+            </div>
+            <div style="margin:10px 8px 0;background:var(--green);border-radius:8px;padding:7px;text-align:center;font-size:9px;font-weight:700;color:#fff;">Save Today's Log</div>
+            <div style="background:var(--green-light);border-radius:8px;margin:8px 8px 0;padding:8px;">
+              <div style="font-size:8px;font-weight:700;color:var(--green);margin-bottom:4px;">📊 This Week's Insight</div>
+              <div style="font-size:7px;color:var(--text-mid);line-height:1.5;">School stress ↑ on Mon & Wed<br>Most common: School (4 days)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Stress Tracker</div>
+    </div>
+
+    <!-- Focus Screen -->
+    <div class="screen-item">
+      <div class="screen-phone">
+        <div class="screen-inner">
+          <div class="screen-header" style="background:#1e40af"><div class="screen-header-title">Focus Session</div><div class="screen-header-sub">🔥 5-day streak</div></div>
+          <div class="screen-body">
+            <div style="font-size:8px;font-weight:700;color:var(--text-mid);margin-bottom:6px;">Choose Duration</div>
+            <div style="display:flex;gap:4px;margin-bottom:10px;">
+              <div style="flex:1;text-align:center;padding:5px 2px;border-radius:6px;font-size:8px;font-weight:600;background:var(--green-light);color:var(--text-mid)">15m</div>
+              <div style="flex:1;text-align:center;padding:5px 2px;border-radius:6px;font-size:8px;font-weight:700;background:var(--green);color:#fff">25m</div>
+              <div style="flex:1;text-align:center;padding:5px 2px;border-radius:6px;font-size:8px;font-weight:600;background:var(--green-light);color:var(--text-mid)">45m</div>
+              <div style="flex:1;text-align:center;padding:5px 2px;border-radius:6px;font-size:8px;font-weight:600;background:var(--green-light);color:var(--text-mid)">60m</div>
+            </div>
+            <div class="focus-timer">
+              <div class="focus-circle"><div class="focus-time">24:59</div></div>
+              <div class="focus-label">Interruptions: 0</div>
+              <div class="focus-start-btn">🎯 Start Session</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:4px 0 0;">
+              <div style="background:var(--green-light);border-radius:8px;padding:7px;text-align:center;"><div style="font-size:14px;font-weight:700;color:var(--green)">20</div><div style="font-size:7px;color:var(--text-muted)">Total Sessions</div></div>
+              <div style="background:var(--green-light);border-radius:8px;padding:7px;text-align:center;"><div style="font-size:14px;font-weight:700;color:var(--green)">4.2⭐</div><div style="font-size:7px;color:var(--text-muted)">Avg Rating</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Focus Timer</div>
+    </div>
+
+    <!-- Chat Screen -->
+    <div class="screen-item">
+      <div class="screen-phone">
+        <div class="screen-inner">
+          <div class="screen-header"><div class="screen-header-title">Chat with Mindi 🌿</div><div class="screen-header-sub">Your AI wellness companion</div></div>
+          <div style="padding:8px;display:flex;flex-direction:column;gap:8px;flex:1;">
+            <div style="background:var(--green-light);border-radius:10px 10px 10px 2px;padding:8px 10px;font-size:8px;line-height:1.5;color:var(--text-dark);">Hi! I'm Mindi 🌿 How are you feeling today? I'm here to listen and support you.</div>
+            <div style="background:var(--green);border-radius:10px 10px 2px 10px;padding:8px 10px;font-size:8px;line-height:1.5;color:#fff;align-self:flex-end">I'm feeling a bit stressed about my exams coming up.</div>
+            <div style="background:var(--green-light);border-radius:10px 10px 10px 2px;padding:8px 10px;font-size:8px;line-height:1.5;color:var(--text-dark);">That's completely understandable 💚 Exam stress is very real. Let's try a quick breathing exercise to calm your mind. Ready?</div>
+            <div style="display:flex;align-items:center;gap:4px;padding:8px 0 4px;margin-top:auto;">
+              <div style="flex:1;background:var(--green-light);border-radius:12px;padding:6px 10px;font-size:8px;color:var(--text-muted)">Message Mindi...</div>
+              <div style="width:24px;height:24px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M22 2L11 13M22 2L15 22 11 13 2 9z"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">AI Wellness Chat</div>
+    </div>
+
+    <!-- Insights Screen -->
+    <div class="screen-item">
+      <div class="screen-phone">
+        <div class="screen-inner">
+          <div class="screen-header" style="background:#7c3aed"><div class="screen-header-title">Insights</div><div class="screen-header-sub">Stress × Focus correlation</div></div>
+          <div class="screen-body">
+            <div style="font-size:8px;font-weight:700;color:var(--text-mid);margin-bottom:6px;">Weekly Stress Trend</div>
+            <div style="display:flex;align-items:flex-end;gap:3px;height:40px;margin-bottom:10px;">
+              <div style="flex:1;background:#c0392b;border-radius:2px 2px 0 0;height:80%"></div>
+              <div style="flex:1;background:#c0392b;border-radius:2px 2px 0 0;height:90%"></div>
+              <div style="flex:1;background:var(--amber);border-radius:2px 2px 0 0;height:60%"></div>
+              <div style="flex:1;background:var(--green);border-radius:2px 2px 0 0;height:40%"></div>
+              <div style="flex:1;background:var(--green);border-radius:2px 2px 0 0;height:35%"></div>
+              <div style="flex:1;background:var(--amber);border-radius:2px 2px 0 0;height:50%"></div>
+              <div style="flex:1;background:var(--green);border-radius:2px 2px 0 0;height:30%"></div>
+            </div>
+            <div style="font-size:7px;display:flex;justify-content:space-between;color:var(--text-muted);margin-bottom:8px;"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+            <div style="background:var(--green-light);border-radius:8px;padding:8px;margin-bottom:6px;">
+              <div style="font-size:8px;font-weight:700;color:var(--green);margin-bottom:3px;">✨ Key Insight</div>
+              <div style="font-size:7px;color:var(--text-mid);line-height:1.5;">"Your focus score is 40% higher on low-stress days. School stress is your main blocker."</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">
+              <div style="background:rgba(46,125,94,.08);border-radius:7px;padding:7px;text-align:center;"><div style="font-size:12px;font-weight:700;color:var(--green)">4.2</div><div style="font-size:7px;color:var(--text-muted)">Avg Focus</div></div>
+              <div style="background:rgba(192,57,43,.08);border-radius:7px;padding:7px;text-align:center;"><div style="font-size:12px;font-weight:700;color:#c0392b">2.8</div><div style="font-size:7px;color:var(--text-muted)">Avg Stress</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Insights</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CHAT SECTION -->
+<section id="chat" class="chat-section">
+  <div class="chat-wrapper">
+    <div>
+      <span class="section-tag reveal">Meet Mindi</span>
+      <h2 class="section-title reveal reveal-delay-1">Your 24/7 AI wellness<br>companion</h2>
+      <p class="section-sub reveal reveal-delay-2">Mindi is powered by Claude AI and trained to be a culturally respectful, compassionate listener. She never diagnoses — she listens, guides, and supports.</p>
+      <div class="values-list">
+        <div class="value-item reveal">
+          <div class="value-dot"></div>
+          <div>
+            <h4>Emotionally Intelligent</h4>
+            <p>Mindi recognises distress and responds with warmth, offering breathing exercises and grounding techniques tailored to your situation.</p>
+          </div>
+        </div>
+        <div class="value-item reveal reveal-delay-1">
+          <div class="value-dot"></div>
+          <div>
+            <h4>Culturally Aware</h4>
+            <p>Designed specifically for Ethiopian contexts — respectful of local values, language nuances, and community dynamics.</p>
+          </div>
+        </div>
+        <div class="value-item reveal reveal-delay-2">
+          <div class="value-dot"></div>
+          <div>
+            <h4>Privacy-First</h4>
+            <p>All conversations are secured. Mindi gently encourages professional help when appropriate without sharing your data.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div class="chat-window">
+        <div class="chat-header">
+          <div class="chat-avatar">🌿</div>
+          <div class="chat-header-info">
+            <h4>Mindi</h4>
+            <p>WellMind AI Companion</p>
+          </div>
+          <div class="chat-online"></div>
+        </div>
+        <div class="chat-body" id="chatBody">
+          <div class="chat-bubble mindi">Hi there 💚 I'm Mindi, your wellness companion. How are you feeling today?</div>
+          <div class="chat-bubble user">I've been really anxious about my university exams.</div>
+          <div class="chat-bubble mindi">I hear you — exam anxiety is so real, and it takes courage to acknowledge it. Let's try a simple breathing exercise together. Breathe in for 4 counts... hold for 4... exhale for 6. How does that feel? 🌬️</div>
+          <div class="chat-bubble user">That actually helped a bit, thank you.</div>
+          <div class="chat-bubble mindi" id="typingBubble" style="display:none">
+            <span class="typing-dots">
+              <span style="animation:blink 1.2s .0s infinite both">●</span>
+              <span style="animation:blink 1.2s .2s infinite both">●</span>
+              <span style="animation:blink 1.2s .4s infinite both">●</span>
+            </span>
+          </div>
+        </div>
+        <div class="chat-input-row">
+          <input class="chat-input" type="text" placeholder="Message Mindi..." id="chatInput" onkeypress="if(event.key==='Enter')sendChat()">
+          <button class="chat-send" onclick="sendChat()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M22 2L11 13M22 2L15 22 11 13 2 9z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QR / DOWNLOAD -->
+<section id="download" class="qr-section">
+  <span class="section-tag">Download now</span>
+  <h2 class="section-title">Start your wellness journey today</h2>
+  <p class="section-sub">Download WellMind Ethiopia — free, for everyone. Scan the QR code or tap the link below to install on your phone.</p>
+
+  <div class="qr-cards">
+    <div class="qr-card">
+      <div class="qr-box">
+        <svg viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
+          <!-- QR code pattern - stylised WellMind QR -->
+          <rect width="130" height="130" fill="white"/>
+          <!-- Position detection patterns -->
+          <rect x="5" y="5" width="40" height="40" rx="4" fill="#2E7D5E"/>
+          <rect x="10" y="10" width="30" height="30" rx="2" fill="white"/>
+          <rect x="14" y="14" width="22" height="22" rx="1" fill="#2E7D5E"/>
+          <rect x="85" y="5" width="40" height="40" rx="4" fill="#2E7D5E"/>
+          <rect x="90" y="10" width="30" height="30" rx="2" fill="white"/>
+          <rect x="94" y="14" width="22" height="22" rx="1" fill="#2E7D5E"/>
+          <rect x="5" y="85" width="40" height="40" rx="4" fill="#2E7D5E"/>
+          <rect x="10" y="90" width="30" height="30" rx="2" fill="white"/>
+          <rect x="14" y="94" width="22" height="22" rx="1" fill="#2E7D5E"/>
+          <!-- Data modules (decorative pattern) -->
+          <rect x="50" y="5" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="61" y="5" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="72" y="5" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="50" y="16" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="72" y="16" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="50" y="27" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="61" y="27" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="5" y="50" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="16" y="50" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="27" y="50" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="38" y="50" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="50" y="50" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="72" y="50" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="83" y="50" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="50" y="61" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="61" y="61" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="94" y="61" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="105" y="61" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="116" y="61" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="50" y="72" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="72" y="72" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="83" y="72" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="50" y="83" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="61" y="83" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="72" y="83" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="94" y="83" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="50" y="94" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="72" y="94" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="83" y="94" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="116" y="94" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="50" y="105" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="61" y="105" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="94" y="105" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="105" y="105" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="50" y="116" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="72" y="116" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="105" y="116" width="7" height="7" fill="#2E7D5E"/>
+          <rect x="116" y="116" width="7" height="7" fill="#2E7D5E"/>
+          <!-- Center WellMind logo -->
+          <circle cx="65" cy="65" r="12" fill="white"/>
+          <circle cx="65" cy="65" r="10" fill="#2E7D5E"/>
+          <text x="65" y="69" text-anchor="middle" font-size="10" fill="white" font-weight="bold">W</text>
+        </svg>
+      </div>
+      <div class="qr-card-title">Scan to Download</div>
+      <div class="qr-card-sub">Point your phone camera at this code</div>
+      <a href="#" class="qr-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+        Open App Link
+      </a>
+    </div>
+
+    <div class="or-divider">or</div>
+
+    <div class="qr-card" style="justify-content: center;">
+      <div style="font-size: 48px; margin-bottom: 8px;">📱</div>
+      <div class="qr-card-title">Share with Friends</div>
+      <div class="qr-card-sub">Copy the link and share WellMind with your community</div>
+      <div style="background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 12px; padding: 10px 16px; display: flex; align-items: center; gap: 10px; width: 100%;">
+        <span style="font-size: 12px; color: rgba(255,255,255,.8); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">wellmind.et/download</span>
+        <button onclick="copyLink()" style="background: rgba(255,255,255,.2); border: none; color: #fff; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 600; font-family: inherit;">Copy</button>
+      </div>
+      <div id="copiedMsg" style="display:none; font-size:12px; color:rgba(255,255,255,.8); margin-top:-10px;">✅ Copied to clipboard!</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-wrapper">
+    <div>
+      <span class="section-tag reveal">Our story</span>
+      <h2 class="section-title reveal reveal-delay-1">Built in Ethiopia,<br>for Ethiopians</h2>
+      <p class="section-sub reveal reveal-delay-2">WellMind Ethiopia was built at a wellness hackathon by a passionate team who believe mental health support should be accessible, culturally respectful, and available to everyone — regardless of background.</p>
+      <div class="hackathon-badge reveal reveal-delay-3">
+        <div class="hackathon-badge-icon">🏆</div>
+        <div class="hackathon-badge-text">
+          <h4>Wellness Hackathon 2025</h4>
+          <p>Built in 48 hours with love and ambition</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="values-list">
+        <div class="value-item reveal">
+          <div class="value-dot"></div>
+          <div>
+            <h4>Accessibility First</h4>
+            <p>Mental wellness tools should be available to everyone — not just those who can afford therapy sessions.</p>
+          </div>
+        </div>
+        <div class="value-item reveal reveal-delay-1">
+          <div class="value-dot"></div>
+          <div>
+            <h4>Cultural Respect</h4>
+            <p>We understand Ethiopian values, community dynamics, and the nuances of mental health conversations in our context.</p>
+          </div>
+        </div>
+        <div class="value-item reveal reveal-delay-2">
+          <div class="value-dot"></div>
+          <div>
+            <h4>Privacy & Safety</h4>
+            <p>Your data is yours. We use secure JWT auth, never sell data, and Mindi always recommends professional help when needed.</p>
+          </div>
+        </div>
+      </div>
+      <div class="stack-pills reveal reveal-delay-3">
+        <span class="pill">React Native</span>
+        <span class="pill">Expo</span>
+        <span class="pill">Express.js</span>
+        <span class="pill">Supabase</span>
+        <span class="pill">Claude AI</span>
+        <span class="pill">JWT Auth</span>
+        <span class="pill">expo-notifications</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div style="width:28px;height:28px;background:var(--green);border-radius:50% 50% 50% 10%;display:flex;align-items:center;justify-content:center;">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M12 22c0 0-8-4-8-12C4 5.4 7.4 2 12 2s8 3.4 8 8c0 8-8 12-8 12z"/></svg>
+    </div>
+    <span class="footer-logo-text">WellMind Ethiopia</span>
+  </div>
+  <p>Made with <span class="footer-heart">♥</span> at Wellness Hackathon 2025 • Ethiopia</p>
+  <p style="font-size:12px;">Your mental wellness matters.</p>
+</footer>
+
+<style>
+@keyframes blink { 0%,100%{opacity:.2} 50%{opacity:1} }
+</style>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  document.querySelectorAll('.reveal').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight - 60) el.classList.add('visible');
+  });
+});
+
+const targets = [{id:'stat1',val:2400,suffix:'+'},{id:'stat2',val:48,suffix:'+'},{id:'stat3',val:12,suffix:''}];
+let animated = false;
+function animateStats() {
+  if(animated) return; animated = true;
+  targets.forEach(({id,val,suffix}) => {
+    const el = document.getElementById(id); let cur = 0;
+    const inc = val/60;
+    const t = setInterval(() => {
+      cur = Math.min(cur + inc, val);
+      el.textContent = Math.floor(cur) + suffix;
+      if(cur >= val) clearInterval(t);
+    }, 20);
+  });
+}
+const statsObs = new IntersectionObserver(e => { if(e[0].isIntersecting) animateStats(); });
+statsObs.observe(document.querySelector('.stats-bar'));
+
+// Trigger initial reveals
+window.dispatchEvent(new Event('scroll'));
+
+// Demo chat
+const demoReplies = [
+  "That's a beautiful step forward 🌿 Consistency is what builds real change. How about we set a gentle reminder for tomorrow?",
+  "I'm proud of you for reaching out. Taking care of your mind is one of the most important things you can do.",
+  "Remember — you don't have to have everything figured out. One mindful moment at a time. 💚",
+  "Have you tried the Wellness Circles in the app? Connecting with others who understand can be deeply healing."
+];
+let replyIdx = 0;
+function sendChat() {
+  const inp = document.getElementById('chatInput');
+  const msg = inp.value.trim(); if(!msg) return;
+  inp.value = '';
+  const body = document.getElementById('chatBody');
+  const userBubble = document.createElement('div');
+  userBubble.className = 'chat-bubble user'; userBubble.textContent = msg;
+  body.appendChild(userBubble);
+  const typing = document.getElementById('typingBubble');
+  typing.style.display = 'block';
+  body.scrollTop = body.scrollHeight;
+  setTimeout(() => {
+    typing.style.display = 'none';
+    const reply = document.createElement('div');
+    reply.className = 'chat-bubble mindi';
+    reply.textContent = demoReplies[replyIdx % demoReplies.length]; replyIdx++;
+    body.appendChild(reply);
+    body.scrollTop = body.scrollHeight;
+  }, 1400);
+}
+
+function copyLink() {
+  navigator.clipboard.writeText('https://wellmind.et/download').then(() => {
+    document.getElementById('copiedMsg').style.display = 'block';
+    setTimeout(() => document.getElementById('copiedMsg').style.display = 'none', 2000);
+  });
+}
+</script>
+</body>
+</html>
